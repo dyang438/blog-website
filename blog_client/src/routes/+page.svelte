@@ -1,31 +1,21 @@
-<script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
-</script>
-
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Investigations in Programming</title>
+	<meta name="Systems Programming Low Level Blog by David Yang" content="Systems-Blog" />
 </svelte:head>
 
 <section>
 	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
+		Recreational Investigations into Systems Programming
 	</h1>
 
 	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
+		Welcome to my blog!<br>
+		I'm a computer science undergrad at UPenn with a passion for low-level programming.<br>
+		My reasoning for starting this website is to bookkeep methods I'm inventing and technologies I'm learning!<br> 
+		I'm excited to share my findings with you and demystify parts of the computer one-by-one.<br>
 	</h2>
 
-	<Counter />
+
 </section>
 
 <style>
@@ -41,19 +31,11 @@
 		width: 100%;
 	}
 
-	.welcome {
-		display: block;
-		position: relative;
+	h2 {
 		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+		text-align: center;
+		font-size: large;
+		line-height: 150%;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
 </style>
