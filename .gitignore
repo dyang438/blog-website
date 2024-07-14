@@ -1,2 +1,5 @@
 *.o
 *.exe
+
+blog_investigations/cleque/cleque_test
+blog_investigations/cleque/deque_test
