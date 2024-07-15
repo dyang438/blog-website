@@ -62,13 +62,14 @@ int test_one (cleque* main_cleque)
 		cleque_pop_back(main_cleque);
 	}	
 
+	timer_end_time (test_name, start_time);
+
 	if (main_cleque->adjusted_len == 3) 
 	{
 		fprintf(stderr, "%s: Passed!\n", test_name);
 	}
 	else fprintf(stderr, "%s: Failed\n", test_name);
 
-	timer_end_time (test_name, start_time);
 	return 0;
 }
 
@@ -82,13 +83,14 @@ int test_two (cleque* main_cleque)
 		cleque_pop_front(main_cleque);
 	}
 
+	timer_end_time (test_name, start_time);
+
 	if (main_cleque->adjusted_len == 3) 
 	{
 		fprintf(stderr, "%s: Passed!\n", test_name);
 	}
 	else fprintf(stderr, "%s: Failed\n", test_name);
 
-	timer_end_time (test_name, start_time);
 	return 0;
 }
 
@@ -96,23 +98,25 @@ int test_two (cleque* main_cleque)
 int test_three (cleque* main_cleque)
 {
 	char* test_name = "Cleque test push_front";
-	clock_t start_time = timer_start_time(test_name);
+
 	for (int i = TEST_SIZE-1; i >= 3; i--) 
 	{ 
 		cleque_pop_front(main_cleque);
 	}
 	
+	clock_t start_time = timer_start_time(test_name);
+
 	for (int i = 0; i <= TEST_SIZE-3; i++)
 	{
 		cleque_push_front(main_cleque, i);
 	}
  
+	timer_end_time (test_name, start_time);
+
 	if (main_cleque->adjusted_len == TEST_SIZE) {
 		fprintf(stderr, "%s: Passed!\n", test_name);
 	}
 	else fprintf(stderr, "%s: Failed\n", test_name);
-
-	timer_end_time (test_name, start_time);
 
 	return 0;
 }
@@ -121,23 +125,25 @@ int test_three (cleque* main_cleque)
 int test_four (cleque* main_cleque)
 {
 	char* test_name = "Cleque test push_back";
-	clock_t start_time = timer_start_time(test_name);
+
 	for (int i = TEST_SIZE-1; i >= 3; i--) 
 	{ 
 		cleque_pop_back(main_cleque);
 	}
+
+	clock_t start_time = timer_start_time(test_name);
 
 	for (int i = 0; i <= TEST_SIZE-3; i++)
 	{
 		cleque_push_back(main_cleque, i);
 	}
 	
+	timer_end_time (test_name, start_time);
+
 	if (main_cleque->adjusted_len == TEST_SIZE) {
 		fprintf(stderr, "%s: Passed!\n", test_name);
 	}
 	else fprintf(stderr, "%s: Failed\n", test_name);
-
-	timer_end_time (test_name, start_time);
 
 	return 0;
 }

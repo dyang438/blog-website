@@ -7,6 +7,7 @@ deque* init_deque (int* array, int size)
 // Invariant is that array == size, common usage wouldn't have either have values, so default is (NULL, 0) as args
 {
 	deque* ret_deque = malloc(sizeof(deque));
+	ret_deque->length = size;
 	if (!ret_deque) 
 	{
 		fprintf(stderr, "call to malloc failed on deque");
@@ -39,34 +40,93 @@ deque* init_deque (int* array, int size)
 	iter->next = head;
 	ret_deque->last = iter;
 
-	fprintf(stderr, "first: %d", ret_deque->first->payload);
-	fprintf(stderr, "last: %d", ret_deque->last->payload);
-
 	return ret_deque;
 }
 
 
 int deque_pop_front (deque* input)
 {
+	if (!input || !input->first) {
+		exit(-1); 
+	}
+
 	int ret = input->first->payload;
 	input->first->next->prev = input->last;
 	input->last->next = input->first->next;
 	input->first = input->first->next;
+	input->length--;
 	return ret;
+}
+
+
+int deque_pop_back (deque* input)
+{
+	if (!input || !input->first) {
+		exit(-1); 
+	}
+
+	int ret = input->last->payload;
+	input->first->prev = input->last->prev;
+	input->last->prev->next = input->first;
+	input->last = input->last->prev;
+	input->length--;
+	return ret;
+}
+
+
+void deque_push_front(deque *input, int val)
+{
+	deque_node* new = malloc(sizeof(deque_node));
+	new->payload = val;
+	new->next = NULL;
+	new->prev = NULL;
+	input->length ++;
+
+	if (!input->first || !input->last) {
+		input->first = new;
+		input->last = new;
+	}
+
+	input->first->prev = new;
+	new->prev = input->last;
+	new->next = input->first;
+	input->last->next = new;
+	input->first = new;
+}
+
+
+void deque_push_back(deque *input, int val)
+{
+	deque_node* new = malloc(sizeof(deque_node));
+	new->payload = val;
+	new->next = NULL;
+	new->prev = NULL;
+	input->length ++;
+
+	if (!input->first || !input->last) {
+		input->first = new;
+		input->last = new;
+	}
+
+	input->first->prev = new;
+	new->prev = input->last;
+	new->next = input->first;
+	input->last->next = new;
+	input->last = new;
 }
 
 
 void print_deque (deque* input) 
 {
-	fprintf(stdout, "[");
+	fprintf(stderr, "[");
 
 	deque_node* iter = input->first;
 	deque_node* last = input->last;
 	while (iter != last) 
 	{
-		fprintf(stdout, "%d, ", iter->payload);
+		fprintf(stderr, "%d, ", iter->payload);
 		iter = iter->next;
 	}
-	fprintf(stdout, "%d", iter->payload);
-	fprintf(stdout, "]");
+	fprintf(stderr, "%d", iter->payload);
+	fprintf(stderr, "]");
 }
